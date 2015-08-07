@@ -1,0 +1,248 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="View_MasterPage" %>
+
+<%@ Register Src="~/UserControls/UC_SlideShow.ascx" TagPrefix="uc1" TagName="UC_SlideShow" %>
+<%@ Register Src="~/UserControls/UC_MenuNgang.ascx" TagPrefix="uc1" TagName="UC_MenuNgang" %>
+<%@ Register Src="~/UserControls/UC_Hotline.ascx" TagPrefix="uc1" TagName="UC_Hotline" %>
+<%@ Register Src="~/UserControls/UC_Menu.ascx" TagPrefix="uc1" TagName="UC_Menu" %>
+<%@ Register Src="~/UserControls/UC_MenuBottom.ascx" TagPrefix="uc1" TagName="UC_MenuBottom" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <%-- Header Content PlaceHoder Extender --%>
+    <title><%= System.Configuration.ConfigurationManager.AppSettings["title"]%></title>
+    <meta name="Keywords" content="<%= System.Configuration.ConfigurationManager.AppSettings["keywords"]%>" />
+    <meta name="description" content="<%= System.Configuration.ConfigurationManager.AppSettings["description"]%>" />
+    <meta name="generator" content="<%= System.Configuration.ConfigurationManager.AppSettings["generator"]%>" />
+    <meta name="og:type" content="Sao Nam" />
+    <meta name="og:url" content="sanaco.com" />
+    <meta name="og:title" content="Sao Nam" />
+    <meta name="og:description" content="Sao Nam" />
+
+    <link href="/Styles/CSS/Reset.css" rel="stylesheet" />
+    <link href="/Styles/CSS/Desktop.Global.css" rel="stylesheet" />
+    <link href="/Styles/CSS/Desktop.Content.css" rel="stylesheet" />
+    <link href="/Styles/CSS/Desktop.Album.css" rel="stylesheet" />
+    <link href="/Styles/CSS/Desktop.Contact.css" rel="stylesheet" />
+
+    <%-- Fancybox --%>
+    <link href="/Styles/FancyBox-2.1.5/source/helpers/jquery.fancybox-buttons.css" rel="stylesheet" />
+    <link href="/Styles/FancyBox-2.1.5/source/helpers/jquery.fancybox-thumbs.css" rel="stylesheet" />
+    <link href="/Styles/FancyBox-2.1.5/source/jquery.fancybox.css" rel="stylesheet" />
+
+    <link type="text/css" href="/Styles/flexslider/css/flexslider.css" rel="stylesheet" />
+    <link type="text/css" href="/Styles/highslide/highslide.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/Styles/JS/jquery-10.2.min.js"></script>
+    <script>
+        function button_click(objTextBox, objBtnID) {
+            if (window.event.keyCode == 13) {
+                document.getElementById(objBtnID).focus();
+                document.getElementById(objBtnID).click();
+            }
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="HeadExtender" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="MainForm" runat="server">
+        <asp:ScriptManager ID="MainScriptManager" runat="server"></asp:ScriptManager>
+        <div class="shopping-cart">
+            <a href="/View/AddCart.aspx" data-fancybox-type="iframe" class="link" title="Giỏ hàng của bạn" id="shopping-cart">
+                <span class="cart" />
+            </a>
+        </div>
+        <div id="banner">
+            <div id="banner-wrapper">
+                <div id="logo">
+                    <a href="/home.html" class="link">
+                        <img src="/Design/logo.png" alt="Sao Nam logo" class="img" />
+                    </a>
+                </div>
+                <div id="web-title">
+                    <h1>SAO NAM</h1>
+                    <h6>GIẢI PHÁP AN NINH TOÀN DIỆN</h6>
+                </div>
+                <div class="search-bar">
+                    <div class="search-content">
+                        <div class="search-input">
+                            <asp:TextBox ID="txtSearch" runat="server" placeholder="Bạn tìm kiếm gì ..." CssClass="input"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtSearch" CssClass="red" Style="float: left; margin-top: 13px;">*</asp:RequiredFieldValidator>
+                        </div>
+                        <div class="vdivider"></div>
+                        <div class="search-option">
+                            <asp:DropDownList ID="drlSearchOption" runat="server" CssClass="drlSearchOption">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="search-icon">
+                        <asp:LinkButton ID="btnSearch" runat="server" CssClass="link" OnClick="btnSearch_Click">
+                            <img src="/Design/search.png" alt="Sao Nam search"/>
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="hnavigation">
+            <div class="hnavigation-wrapper nav">
+                <uc1:UC_MenuNgang runat="server" ID="UC_MenuNgang" />
+            </div>
+            <div class="bao-gia"></div>
+        </div>
+
+        <div class="body-wrapper">
+            <div class="header">
+                <div class="vnavigation">
+                    <div class="vnavigation-wrapper vnavi">
+                        <uc1:UC_Menu runat="server" ID="UC_Menu" />
+
+                    </div>
+                </div>
+
+                <div class="hslideshow">
+                    <uc1:UC_SlideShow runat="server" ID="UC_SlideShow" />
+                </div>
+
+                <div class="support-info-box">
+                    <uc1:UC_Hotline runat="server" ID="UC_Hotline" />
+                </div>
+
+            </div>
+
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </div>
+
+        <div class="footer">
+            <div class="footer-wrapper">
+                <div class="info">
+                    <div class="block-wrapper1">
+                        <h1>CÔNG TY TNHH KỸ THUẬT CÔNG NGHỆ SAO NAM</h1>
+                        <br />
+                        <p>Địa chỉ: 47 Nguyễn Chánh Sắt, P13, Q.Tân Bình, TP.HCM - Chi nhánh Phan Thiết: 309A</p>
+                        <p>TP.Phan Thiết, Bình Thuận - Fax: 0623 82 56 68</p>
+                        <p>Điện thoại: 0623 82 56 68 - Email: info@sanaco.com.vn</p>
+                    </div>
+                </div>
+                <div class="wdivider"></div>
+                <div class="intro">
+
+                    <uc1:UC_MenuBottom runat="server" ID="MenuBottomGioiThieu" />
+
+                </div>
+                <div class="wdivider"></div>
+                <div class="use">
+
+                    <uc1:UC_MenuBottom runat="server" ID="MenuBottomHuongDan" />
+
+                </div>
+                <div class="wdivider"></div>
+                <div class="policy">
+
+                    <uc1:UC_MenuBottom runat="server" ID="MenuBottomChinhSach" />
+
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+    <script>
+        $(document).ready(function () {
+            $("#left").height($(window).height());
+            $("#slideshow").height($(window).height());
+            $(".right").height($(window).height());
+        });
+    </script>
+    <%--<script type="text/javascript" src="/Styles/Gplusalbum/gplusalbum.app.js"></script>--%>
+
+    <%-- Script cho slideshow hinh anh --%>
+    <script type="text/javascript" src="/Styles/flexslider/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="/Styles/flexslider/js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                slideshowSpeed: 5000
+            });
+        });
+    </script>
+
+    <%-- Script cho html scrollbar --%>
+    <script src="/Styles/nicescroll/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("html").niceScroll();
+        });
+
+    </script>
+
+    <%-- FancyBox library --%>
+    <script src="/Styles/FancyBox-2.1.5/lib/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>
+    <script src="/Styles/FancyBox-2.1.5/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="/Styles/FancyBox-2.1.5/source/jquery.fancybox.js" type="text/javascript"></script>
+    <script src="/Styles/FancyBox-2.1.5/source/helpers/jquery.fancybox-buttons.js" type="text/javascript"></script>
+    <script src="/Styles/FancyBox-2.1.5/source/helpers/jquery.fancybox-media.js" type="text/javascript"></script>
+    <script src="/Styles/FancyBox-2.1.5/source/helpers/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+
+    <%-- Show anh dùng fancybox --%>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".imgshow").fancybox({
+                openEffect: 'none',
+                closeEffect: 'none',
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#shopping-cart").fancybox({
+                maxWidth: 1349,
+                maxHeight: 630,
+                fitToView: false,
+                width: '818px',
+                height: '519px',
+                autoSize: false,
+                closeClick: false,
+                openEffect: 'none',
+                closeEffect: 'none'
+            });
+        });
+
+    </script>
+
+    <%-- Fancy for video popup --%>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.fancybox-media').fancybox({
+                openEffect: 'none',
+                closeEffect: 'none',
+                helpers: {
+                    media: {}
+                }
+            });
+        });
+    </script>
+
+    <asp:ContentPlaceHolder ID="FootExtender" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
